@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:alpine
+    restart: always
+    volumes:
+      - "./data:/data"
+
+  telegram-bot:
+    image: defelo/corona-telegram-bot:latest
+    restart: always
+    build: .
+    tty: true
+    environment:
+      TOKEN: '<TOKEN>'
+      REDIS_HOST: "redis"
+      CHANNEL: '<CHANNEL>'
+      DISTRICT: '<DISTRICT>'
