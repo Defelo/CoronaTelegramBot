@@ -11,6 +11,8 @@ requests = "*"
 redis = "*"
 
 [dev-packages]
+flake8 = "*"
 
 [scripts]
 bot = "python bot.py"
+flake8 = "flake8 . --count --statistics --show-source"
