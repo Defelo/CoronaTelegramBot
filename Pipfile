@@ -14,5 +14,5 @@ redis = "*"
 flake8 = "*"
 
 [scripts]
-bot = "python bot.py"
+bot = "python bot/bot.py"
 flake8 = "flake8 . --count --statistics --show-source"

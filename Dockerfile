@@ -24,7 +24,6 @@ USER bot
 
 COPY --from=builder /build/.venv/lib /usr/local/lib
 
-COPY covid_api.py /app/
-COPY bot.py /app/
+COPY bot /app/
 
 CMD python bot.py
