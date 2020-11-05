@@ -12,6 +12,8 @@ services:
     restart: always
     build: .
     tty: true
+    depends_on:
+      - redis
     environment:
       TOKEN: '<TOKEN>'
       REDIS_HOST: "redis"
