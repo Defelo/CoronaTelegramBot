@@ -56,7 +56,7 @@ jobs:
           file: Dockerfile
           context: .
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -73,7 +73,7 @@ jobs:
           file: Dockerfile
           context: .
           cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
       - name: Clear
         if: always()
