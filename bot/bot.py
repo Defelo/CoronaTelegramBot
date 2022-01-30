@@ -21,8 +21,8 @@ def send_message(text: str):
     )
 
 
-def update(ts: str) -> bool:
-    if redis.get("last_update") == ts.encode():
+def update(ts: float) -> bool:
+    if ts <= float(redis.get("last_update") or 0):
         return False
     redis.set("last_update", ts)
     return True
@@ -46,7 +46,7 @@ def update_value(district: dict, key: str, precision: int = 0):
 
 def callback():
     last_update, district = get_district(DISTRICT)
-    if not update(last_update):
+    if not update(last_update.timestamp()):
         return
 
     text = [
@@ -55,7 +55,7 @@ def callback():
         f"Fälle/100k EW: {update_value(district, 'casesPer100k', 2)}",
         f"Fälle letzte 7d/100k EW: {update_value(district, 'weekIncidence', 2)}",
         f"Todesfälle: {update_value(district, 'deaths')}",
-        f"\nStand: {last_update}",
+        f"\nStand: {last_update.strftime('%d.%m.%Y, %H:%M Uhr')}",
     ]
     send_message(text="\n".join(text))
 
